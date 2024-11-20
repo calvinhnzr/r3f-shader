@@ -1,4 +1,5 @@
 import React from "react"
+import { TestPlane } from "./TestPlane"
 import { Plane } from "./Plane"
 import { CameraControls, Grid } from "@react-three/drei"
 
@@ -12,6 +13,7 @@ export const Scene = () => {
       </group>
 
       <group name="meshes">
+        <TestPlane />
         <Plane />
       </group>
     </>
