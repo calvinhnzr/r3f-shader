@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react"
 import * as THREE from "three"
+import { useFrame } from "@react-three/fiber"
 import { useControls, Leva } from "leva"
 import testVertextShader from "../shaders/test/vertex.glsl"
 import testFragmentShader from "../shaders/test/fragment.glsl"
@@ -9,14 +10,15 @@ export const Plane = () => {
   const geometryRef = useRef()
   const materialRef = useRef()
 
-  const { x, y } = useControls("uFrequency", {
-    x: {
+  // Leva controls
+  const { frequencyX, frequencyY } = useControls("uFrequency", {
+    frequencyX: {
       value: 1,
       min: 0,
       max: 10,
       step: 1,
     },
-    y: {
+    frequencyY: {
       value: 1,
       min: 0,
       max: 10,
@@ -24,25 +26,17 @@ export const Plane = () => {
     },
   })
 
-  const count = geometryRef.current?.attributes.position.count
-  const randoms = new Float32Array(count)
-  for (let i = 0; i < count; i++) {
-    randoms[i] = Math.random()
-  }
+  const uniforms = useRef({
+    uFrequency: new THREE.Uniform(new THREE.Vector2(frequencyX, frequencyY)),
+  })
 
   useEffect(() => {
-    if (geometryRef.current) {
-      const count = geometryRef.current.attributes.position.count
-      const randoms = new Float32Array(count)
-      for (let i = 0; i < count; i++) {
-        randoms[i] = Math.random()
-      }
-      geometryRef.current.setAttribute(
-        "aRandom",
-        new THREE.BufferAttribute(randoms, 1)
-      )
+    if (materialRef.current) {
+      materialRef.current.uniforms.uFrequency.value.x = frequencyX
+      materialRef.current.uniforms.uFrequency.value.y = frequencyY
+      console.log(materialRef.current.uniforms.uFrequency.value)
     }
-  }, [geometryRef])
+  }, [frequencyX, frequencyY])
 
   return (
     <mesh ref={meshRef}>
@@ -50,9 +44,8 @@ export const Plane = () => {
       <rawShaderMaterial
         vertexShader={testVertextShader}
         fragmentShader={testFragmentShader}
-        uniforms={{
-          uFrequency: { value: new THREE.Vector2(x, y) },
-        }}
+        uniforms={uniforms.current}
+        // uniforms={{ value: new THREE.Vector2(10, 5) }}
         wireframe
         transparent
         ref={materialRef}

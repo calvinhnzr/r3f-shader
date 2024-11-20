@@ -9,7 +9,7 @@ void main() {
   // mesh related transformations
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
   modelPosition.z += sin(modelPosition.x * uFrequency.x) * 0.1;
-  modelPosition.z += sin(modelPosition.y * uFrequency.x) * 0.1;
+  modelPosition.z += sin(modelPosition.y * uFrequency.y) * 0.1;
 
   // camera related transformations
   vec4 viewPosition = viewMatrix * modelPosition;
