@@ -1,11 +1,14 @@
 import { useEffect, useRef } from "react"
 import * as THREE from "three"
-import { useThree, useFrame, extend } from "@react-three/fiber"
+import { TextureLoader } from "three/src/loaders/TextureLoader"
+import { useThree, useFrame, extend, useLoader } from "@react-three/fiber"
 import { useControls, folder } from "leva"
 import testVertextShader from "../shaders/test/vertex.glsl"
 import testFragmentShader from "../shaders/test/fragment.glsl"
 
 export const Plane = () => {
+  const flagTexture = useLoader(TextureLoader, "./textures/euro-flag.png")
+
   const meshRef = useRef()
   const geometryRef = useRef()
   const materialRef = useRef()
@@ -43,6 +46,9 @@ export const Plane = () => {
     uColor: {
       value: new THREE.Color(uColor),
     },
+    uTexture: {
+      value: flagTexture,
+    },
   })
 
   useFrame((state) => {
@@ -58,11 +64,13 @@ export const Plane = () => {
       materialRef.current.uniforms.uFrequency.value.x = frequencyX
       materialRef.current.uniforms.uFrequency.value.y = frequencyY
       meshRef.current.material.uniforms.uColor.value = new THREE.Color(uColor)
+
+      console.log(geometryRef.current)
     }
   }, [frequencyX, frequencyY, uColor])
 
   return (
-    <mesh scale-y={2 / 3} ref={meshRef}>
+    <mesh scale-y={2 / 3} position-y={0.5} ref={meshRef}>
       <planeGeometry args={[1, 1, 32, 32]} ref={geometryRef} />
       <rawShaderMaterial
         vertexShader={testVertextShader}
