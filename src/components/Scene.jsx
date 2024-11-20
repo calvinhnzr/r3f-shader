@@ -7,6 +7,7 @@ export const Scene = () => {
     <>
       <group name="setup">
         <CameraControls />
+
         <axesHelper args={[10]} />
         <Grid args={[4, 4]} />
       </group>
