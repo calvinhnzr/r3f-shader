@@ -1,16 +1,18 @@
 import React from "react"
-import { Cube } from "./Cube"
-import { CameraControls } from "@react-three/drei"
+import { Plane } from "./Plane"
+import { CameraControls, Grid } from "@react-three/drei"
 
 export const Scene = () => {
   return (
     <>
       <group name="setup">
         <CameraControls />
+        <axesHelper args={[10]} />
+        <Grid args={[4, 4]} />
       </group>
 
       <group name="meshes">
-        <Cube />
+        <Plane />
       </group>
     </>
   )
