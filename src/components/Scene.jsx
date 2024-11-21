@@ -1,20 +1,36 @@
 import React from "react"
-import { TestPlane } from "./TestPlane"
-import { Plane } from "./Plane"
-import { CameraControls, Grid } from "@react-three/drei"
+import { PatternPlane } from "./PatternPlane"
+import { CameraControls, Grid, Html } from "@react-three/drei"
 
 export const Scene = () => {
   return (
     <>
       <group name="setup">
         <CameraControls />
-        {/* <axesHelper args={[10]} /> */}
+        <axesHelper args={[10]} />
         <Grid args={[4, 4]} />
       </group>
 
+      <Html
+        position={[0.1, 0.75, 0]}
+        style={{
+          color: "green",
+        }}
+      >
+        Y
+      </Html>
+
+      <Html
+        position={[0.75, -0.1, 0]}
+        style={{
+          color: "red",
+        }}
+      >
+        X
+      </Html>
+
       <group name="meshes">
-        <TestPlane />
-        <Plane />
+        <PatternPlane />
       </group>
     </>
   )
