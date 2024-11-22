@@ -1,18 +1,19 @@
 import React from "react"
-import { SeaPlane } from "./SeaPlane"
-import { CameraControls, Grid, Html } from "@react-three/drei"
+import { Head } from "./Head"
+import { CameraControls, Environment, Grid, Html } from "@react-three/drei"
 
 export const Scene = () => {
   return (
     <>
       <group name="setup">
         <CameraControls />
-
+        <ambientLight intensity={0.5} />
         {/* <Grid args={[4, 4]} /> */}
+        <Environment preset="city" />
       </group>
 
       <group name="meshes">
-        <SeaPlane />
+        <Head />
       </group>
 
       <group visible={true}>

@@ -7,7 +7,7 @@ import { useControls, folder } from "leva"
 import vertexShader from "../shaders/pattern/vertex.glsl"
 import fragmentShader from "../shaders/pattern/fragment.glsl"
 
-export const PatternPlane = () => {
+export const Pattern = () => {
   const meshRef = useRef()
   const geometryRef = useRef()
   const materialRef = useRef()

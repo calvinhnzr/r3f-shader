@@ -6,7 +6,7 @@ import { useControls, folder } from "leva"
 import testVertextShader from "../shaders/test/vertex.glsl"
 import testFragmentShader from "../shaders/test/fragment.glsl"
 
-export const TestPlane = () => {
+export const Flag = () => {
   const flagTexture = useLoader(TextureLoader, "./textures/euro-flag.png")
 
   const meshRef = useRef()
