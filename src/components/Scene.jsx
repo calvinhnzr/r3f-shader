@@ -1,7 +1,7 @@
 import React from "react"
-import { Custom } from "./Custom"
 import { CameraControls, Environment, Grid, Html } from "@react-three/drei"
 import { Model } from "./Model"
+import { Smoke } from "./Smoke"
 
 export const Scene = () => {
   return (
@@ -14,7 +14,7 @@ export const Scene = () => {
       </group>
 
       <group name="meshes">
-        <Custom />
+        <Smoke />
         <Model />
       </group>
 

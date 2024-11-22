@@ -3,8 +3,8 @@ import * as THREE from "three"
 import { TextureLoader } from "three/src/loaders/TextureLoader"
 import { useThree, useFrame, extend, useLoader } from "@react-three/fiber"
 import { useControls, folder } from "leva"
-import testVertextShader from "../shaders/test/vertex.glsl"
-import testFragmentShader from "../shaders/test/fragment.glsl"
+import testVertextShader from "../shaders/flag/vertex.glsl"
+import testFragmentShader from "../shaders/flag/fragment.glsl"
 
 export const Flag = () => {
   const flagTexture = useLoader(TextureLoader, "./textures/euro-flag.png")
