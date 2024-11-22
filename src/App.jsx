@@ -6,7 +6,14 @@ import { Scene } from "./components/Scene"
 function App() {
   return (
     <>
-      <Canvas>
+      <Canvas
+        camera={{
+          position: [5, 5, 5],
+          fov: 40,
+          near: 0.1,
+          far: 1000,
+        }}
+      >
         <Scene />
       </Canvas>
     </>

@@ -3,5 +3,7 @@
   "tabWidth": 2,
   "semi": false,
   "singleQuote": false,
-  "printWidth": 80
+  "printWidth": 100,
+  "plugins": ["prettier-plugin-glsl"],
+  "overrides": [{ "files": ["*.frag"], "options": { "parser": "glsl-parser" } }]
 }
