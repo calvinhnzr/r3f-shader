@@ -1,5 +1,5 @@
 import React from "react"
-import { PatternPlane } from "./PatternPlane"
+import { SeaPlane } from "./SeaPlane"
 import { CameraControls, Grid, Html } from "@react-three/drei"
 
 export const Scene = () => {
@@ -7,30 +7,40 @@ export const Scene = () => {
     <>
       <group name="setup">
         <CameraControls />
-        <axesHelper args={[10]} />
-        <Grid args={[4, 4]} />
+
+        {/* <Grid args={[4, 4]} /> */}
       </group>
 
-      <Html
-        position={[0.1, 0.75, 0]}
-        style={{
-          color: "green",
-        }}
-      >
-        Y
-      </Html>
-
-      <Html
-        position={[0.75, -0.1, 0]}
-        style={{
-          color: "red",
-        }}
-      >
-        X
-      </Html>
-
       <group name="meshes">
-        <PatternPlane />
+        <SeaPlane />
+      </group>
+
+      <group visible={true}>
+        <Html
+          position={[2.5, -0.1, 0]}
+          style={{
+            color: "red",
+          }}
+        >
+          X
+        </Html>
+        <Html
+          position={[0.1, 2.5, 0]}
+          style={{
+            color: "green",
+          }}
+        >
+          Y
+        </Html>
+        <Html
+          position={[0.1, 0, 2.5]}
+          style={{
+            color: "blue",
+          }}
+        >
+          Z
+        </Html>
+        <axesHelper args={[10]} />
       </group>
     </>
   )
