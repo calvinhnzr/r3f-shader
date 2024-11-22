@@ -3,7 +3,7 @@ import * as THREE from "three"
 import { useThree, useFrame, extend, useLoader } from "@react-three/fiber"
 import { useControls, folder } from "leva"
 
-export const Galaxy = () => {
+export const Custom = () => {
   const meshRef = useRef()
   const geometryRef = useRef()
   const materialRef = useRef()

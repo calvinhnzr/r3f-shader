@@ -1,5 +1,5 @@
 import React from "react"
-import { Galaxy } from "./Galaxy"
+import { Custom } from "./Custom"
 import { CameraControls, Grid, Html } from "@react-three/drei"
 
 export const Scene = () => {
@@ -12,7 +12,7 @@ export const Scene = () => {
       </group>
 
       <group name="meshes">
-        <Galaxy />
+        <Custom />
       </group>
 
       <group visible={true}>
