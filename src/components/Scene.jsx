@@ -1,6 +1,7 @@
 import React from "react"
-import { Head } from "./Head"
+import { Custom } from "./Custom"
 import { CameraControls, Environment, Grid, Html } from "@react-three/drei"
+import { Model } from "./Model"
 
 export const Scene = () => {
   return (
@@ -13,7 +14,8 @@ export const Scene = () => {
       </group>
 
       <group name="meshes">
-        <Head />
+        <Custom />
+        <Model />
       </group>
 
       <group visible={true}>
