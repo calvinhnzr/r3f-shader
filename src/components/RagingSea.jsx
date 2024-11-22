@@ -7,7 +7,7 @@ import { useControls, folder } from "leva"
 import vertexShader from "../shaders/water/vertex.glsl"
 import fragmentShader from "../shaders/water/fragment.glsl"
 
-export const SeaPlane = () => {
+export const RagingSea = () => {
   const meshRef = useRef()
   const geometryRef = useRef()
   const materialRef = useRef()
