@@ -1,7 +1,12 @@
 uniform float uTime;
 uniform float uBigWavesElevation;
 uniform vec2 uBigWavesFrequency;
-uniform float uWaveSpeed;
+uniform float uBigWavesSpeed;
+
+uniform float uSmallWavesElevation;
+uniform float uSmallWavesFrequency;
+uniform float uSmallWavesSpeed;
+uniform float uSmallWavesIterations;
 
 varying float vElevetion;
 
@@ -84,11 +89,7 @@ float cnoise(vec3 P) {
   float n111 = dot(g111, Pf1);
 
   vec3 fade_xyz = fade(Pf0);
-  vec4 n_z = mix(
-    vec4(n000, n100, n010, n110),
-    vec4(n001, n101, n011, n111),
-    fade_xyz.z
-  );
+  vec4 n_z = mix(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z);
   vec2 n_yz = mix(n_z.xy, n_z.zw, fade_xyz.y);
   float n_xyz = mix(n_yz.x, n_yz.y, fade_xyz.x);
   return 2.2 * n_xyz;
@@ -98,11 +99,18 @@ void main() {
   vec4 modelPosition = modelMatrix * vec4(position, 1.0);
 
   float elevation =
-    sin(modelPosition.x * uBigWavesFrequency.x + uTime * uWaveSpeed) *
-    sin(modelPosition.z * uBigWavesFrequency.y + uTime * uWaveSpeed) *
+    sin(modelPosition.x * uBigWavesFrequency.x + uTime * uBigWavesSpeed) *
+    sin(modelPosition.z * uBigWavesFrequency.y + uTime * uBigWavesSpeed) *
     uBigWavesElevation;
 
-  elevation += cnoise(vec3(modelPosition.xz * 3.0, uTime * 0.2)) * 0.15;
+  for (float i = 1.0; i <= uSmallWavesIterations; i++) {
+    //  sharp edges, perlin noise
+    elevation -= abs(
+      cnoise(vec3(modelPosition.xz * uSmallWavesFrequency * i, uTime * uSmallWavesSpeed)) *
+        uSmallWavesElevation /
+        i
+    );
+  }
 
   modelPosition.y += elevation;
 
