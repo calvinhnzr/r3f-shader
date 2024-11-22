@@ -7,13 +7,24 @@ import fragmentShader from "../shaders/smoke/fragment.glsl"
 
 export const Smoke = () => {
   const perlinTexture = useLoader(THREE.TextureLoader, "/textures/perlin.png")
+  // RepeatWrapping is used to repeat the texture
+  perlinTexture.wrapS = THREE.RepeatWrapping
+  perlinTexture.wrapT = THREE.RepeatWrapping
 
   const meshRef = useRef()
   const geometryRef = useRef()
   const materialRef = useRef()
 
   const uniforms = useRef({
+    uTime: new THREE.Uniform(0),
     uPerlinTexture: new THREE.Uniform(perlinTexture),
+  })
+
+  useFrame((state) => {
+    const elapsedTime = state.clock.getElapsedTime()
+    if (materialRef.current) {
+      materialRef.current.uniforms.uTime.value = elapsedTime
+    }
   })
 
   return (
