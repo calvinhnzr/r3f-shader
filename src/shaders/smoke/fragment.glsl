@@ -1,6 +1,7 @@
+uniform float uTime;
 // Sampler2D for Images
 uniform sampler2D uPerlinTexture;
-uniform float uTime;
+uniform vec3 uSmokeColor;
 // uv Coordinates
 varying vec2 vUv;
 
@@ -13,6 +14,7 @@ void main() {
 
   // Smoke
   // One Channel for GrayScale Picture
+  // Pick color from the texture
   float smoke = texture(uPerlinTexture, smokeUv).r;
   // Remap
   smoke = smoothstep(0.4, 1.0, smoke);
@@ -23,7 +25,8 @@ void main() {
   smoke *= smoothstep(1.0, 0.3, vUv.y);
 
   // Final Color
-  vec4 finalColor = vec4(vec3(1.0), smoke);
+  vec4 finalColor = vec4(uSmokeColor, smoke);
+  // finalColor = vec4(1.0, 0.0, 0.0, 1.0);
   gl_FragColor = finalColor;
 
   #include <tonemapping_fragment>

@@ -18,6 +18,7 @@ export const Smoke = () => {
   const uniforms = useRef({
     uTime: new THREE.Uniform(0),
     uPerlinTexture: new THREE.Uniform(perlinTexture),
+    uSmokeColor: new THREE.Uniform(new THREE.Color(0xffffff)),
   })
 
   useFrame((state) => {
@@ -37,6 +38,7 @@ export const Smoke = () => {
         fragmentShader={fragmentShader}
         side={THREE.DoubleSide}
         // wireframe
+        depthWrite={false}
         transparent
       />
     </mesh>
